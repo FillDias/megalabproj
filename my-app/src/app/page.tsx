@@ -1,6 +1,91 @@
+"use client";
+
 import Image from "next/image";
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+// import UserForm from './components/user-form'
+import dynamic from 'next/dynamic';
+import { useEffect } from "react";
+
+const UserForm = dynamic(() => import('./components/user-form'), {
+  ssr: false
+});
+
+
+export function RenderForm() {
+  return (
+    <div>
+      <UserForm />
+    </div>
+  )
+}
+
+export function RenderButtonx() {
+  const router = useRouter()
+ 
+  return (
+    <button type="button" onClick={() => router.push('/dashboardv2')}>
+      Dashboardv2
+    </button>
+  )
+}
+
+
+export function RenderButton() {
+  // const router = useRouter()
+ 
+  return (
+    <div>
+      Dashboardv2
+    </div>
+  )
+}
+
+
+
+export function RenderLinks() {
+  // const pathname = usePathname()
+ 
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link href="/home">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            Stats
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            Portfolio
+          </Link>
+        </li>
+        
+        <li>
+          <Link href="/profile">
+            Profile
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            About
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+
 
 export default function Home() {
+  
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -37,6 +122,16 @@ export default function Home() {
           height={37}
           priority
         />
+      </div>
+
+      <div>
+        {RenderLinks()}
+      </div>
+      <div>
+        {RenderButton()}
+      </div>
+      <div>
+        {RenderForm()}
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
